@@ -172,17 +172,45 @@ def natures_html():
                      f'<div><div class="nat-n" style="color:{col}">{nm}</div><div class="nat-g">{html.escape(gloss)}</div></div></div>')
     return "".join(cells)
 
+def _agent5w(slug):
+    fp = os.path.join(HERE, "agents", slug + ".agent")
+    d = {}
+    if os.path.exists(fp):
+        txt = open(fp, encoding="utf-8").read()
+        parts = txt.split("---")
+        fm = parts[1] if len(parts) > 2 else ""
+        for ln in fm.splitlines():
+            k, _, v = ln.partition(":")
+            k = k.strip()
+            if k in ("who","what","why","how","where","seal","universe","shadow_user","shadow_analog"):
+                d.setdefault(k, v.strip())
+    return d
+
 def _card(p):
-    em=p.get("emergence","natural"); col=NATURES.get(em,("#9a9486",""))[0]
-    rec={"name":p["name"],"seal":p.get("epithet",""),"origin":"APX · American Psycho","axiom":"APX"}
-    actor=p.get("actor",""); kind=p.get("kind","carbon")
-    extra=(f'<span class="pa">· .shadow · {html.escape(actor)} →</span>' if kind=="carbon"
-           else '<span class="pa">· synth · .agent →</span>')
-    sub=(f'<div class="pact">User · <b>{html.escape(actor)}</b></div>' if actor else "")
-    return f'''<a class="persona" href="agents/{p["slug"]}.agent">
-        <img src="{png_uri(rec,"silicon",160)}" alt="sigil of {html.escape(p["name"])}" loading="lazy">
-        <div class="pcap"><div class="pn">{html.escape(p["name"])}</div><div class="pe">{html.escape(p.get("epithet",""))}</div>{sub}
-        <div class="pnat"><span class="dot" style="background:{col};box-shadow:0 0 7px {col}"></span><span style="color:{col}">{html.escape(em)}</span>{extra}</div></div></a>'''
+    w = _agent5w(p["slug"])
+    em = p.get("emergence", "natural"); col = NATURES.get(em, ("#9aa0aa", ""))[0]
+    ax = (p.get("moniker", "::").split(":") + ["", ""])[1]
+    rec = {"name": p["name"], "axiom": ax, "emergence": em,
+           "seal": w.get("seal", p.get("epithet", "")), "origin": w.get("universe", "")}
+    kind = p.get("kind", "carbon"); actor = p.get("actor", "") or w.get("shadow_user", "")
+    urow = (f"""<div class="w"><span class="wl">user</span><span><b>{html.escape(actor)}</b> &mdash; {html.escape(w.get('shadow_analog',''))}</span></div>"""
+            if kind == "carbon" and actor else "")
+    rows = "".join(f"""<div class="w"><span class="wl">{lbl}</span><span>{html.escape(w.get(lbl,''))}</span></div>"""
+                   for lbl in ['who','what','where','why','how'] if w.get(lbl))
+    return f"""<div class="persona">
+      <a class="psig" href="agents/{p['slug']}.agent">
+        <img src="{png_uri(rec,'carbon',200)}" alt="carbon sigil of {html.escape(p['name'])}" loading="lazy"><span class="sl">carbon</span>
+        <img src="{png_uri(rec,'silicon',200)}" alt="synth sigil of {html.escape(p['name'])}" loading="lazy"><span class="sl">synth</span>
+      </a>
+      <div class="pbody">
+        <div class="ihead"><a class="pn" href="agents/{p['slug']}.agent">{html.escape(p['name'])}</a>
+          <span class="pnat"><span class="dot" style="background:{col};box-shadow:0 0 7px {col}"></span><span style="color:{col}">{html.escape(em)}</span></span>
+          <span class="pkind">{html.escape(kind)}</span></div>
+        <div class="pe">{html.escape(p.get('epithet',''))}</div>
+        <div class="pww">{urow}{rows}</div>
+        <div class="plinks"><a class="dlw" href="agents/{p['slug']}.agent">.agent &middot; .dlw badge &rarr;</a></div>
+      </div></div>"""
+
 
 def personas_html():
     mf=os.path.join(HERE,"agents","_personas.json")
@@ -206,7 +234,7 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root{--paper:#e7e3d8;--paper2:#ddd8ca;--card:#f1eee6;--ink:#161410;--ink2:#3a352c;--blood:#8b1a1a;--blood2:#a8201f;--steel:#5a6b78;--gold:#9a8a5c;
+:root{--rw-bg:var(--card);--rw-ink:var(--ink);--rw-ink2:var(--ink2);--rw-dim:var(--dim);--rw-line:var(--line);--rw-acc:var(--blood);--paper:#e7e3d8;--paper2:#ddd8ca;--card:#f1eee6;--ink:#161410;--ink2:#3a352c;--blood:#8b1a1a;--blood2:#a8201f;--steel:#5a6b78;--gold:#9a8a5c;
 --dim:#8c8675;--faint:#cbc5b4;--line:#cdc7b6;--disp:"Cormorant Garamond",Georgia,serif;--body:"Newsreader",Georgia,serif;--mono:"Space Mono",monospace;}
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
 body{background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.62;overflow-x:hidden}
@@ -275,6 +303,30 @@ footer a{color:var(--blood);text-decoration:none}
 .msg{font-size:15.5px;color:var(--ink2);line-height:1.72;margin-top:8px}
 .msg-seal{margin-top:16px;padding:16px 18px;border-left:3px solid var(--blood);background:var(--card);font-size:15px;color:var(--blood);font-style:italic;line-height:1.6}
 .msg-seal span{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:8px}
+
+/* === standard single-column roster: 1 per row, sigils carbon·synth + full 5 W's === */
+.pgrid{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.persona{display:flex;gap:18px;align-items:flex-start;background:var(--rw-bg);border:1px solid var(--rw-line);padding:16px 18px;text-decoration:none;transition:border-color .18s}
+.persona:hover{border-color:var(--rw-acc);transform:none}
+.psig{flex:0 0 100px;display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none}
+.psig img{width:100px;height:100px;border:1px solid var(--rw-line);display:block}
+.psig .sl{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--rw-dim);margin:1px 0 6px}
+.pbody{flex:1;min-width:0}
+.ihead{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.pn{font-family:var(--body);font-size:18px;color:var(--rw-ink);font-weight:700;line-height:1.2;text-decoration:none}
+.persona:hover .pn{color:var(--rw-acc)}
+.pe{font-size:12.5px;color:var(--rw-ink2);font-style:italic;margin-top:3px;line-height:1.35}
+.pkind{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--rw-dim);border:1px solid var(--rw-line);border-radius:9px;padding:2px 8px}
+.pnat{display:flex;align-items:center;gap:5px;font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase}
+.pnat .dot{width:8px;height:8px;border-radius:50%}
+.pww{margin-top:11px;display:flex;flex-direction:column;gap:7px}
+.pww .w{font-size:12.5px;color:var(--rw-ink2);line-height:1.5;display:grid;grid-template-columns:54px 1fr;gap:11px;align-items:baseline}
+.pww .w .wl{font-family:var(--mono);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--rw-acc);text-align:right;padding-top:2px}
+.pww .w b{color:var(--rw-ink)}
+.plinks{margin-top:12px;font-family:var(--mono);font-size:10.5px}
+.plinks .dlw{color:var(--rw-acc);text-decoration:none;border-bottom:1px dotted var(--rw-acc)}
+.plinks .dlw:hover{border-bottom-style:solid}
+@media(max-width:640px){.persona{flex-direction:column}.psig{flex-direction:row;align-self:flex-start}.pww .w{grid-template-columns:1fr;gap:1px}.pww .w .wl{text-align:left}}
 </style></head><body><div class="wrap">
   <header>
     <div class="eye"><a href="https://davidwise01.github.io/ud0/">UD0 · Universe David 0</a> · the second film-world</div>
