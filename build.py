@@ -130,11 +130,41 @@ def ideas_html():
         li="".join(f"<li>{html.escape(p)}</li>" for p in pts)
         out.append(f'<div class="pillar"><h3>{html.escape(t)}</h3><p class="ps">{html.escape(s)}</p><ul>{li}</ul></div>')
     return "\n".join(out)
+ARC_OVERALL = ("A flawless investment banker tends a perfect surface over an absence, narrates a descent into "
+  "murder the film will never confirm, and confesses to everything — to a world too devoted to the surface to "
+  "hear him, or to care.")
+REALFLUFF = [
+ ("The consumerist void as cultural diagnosis", "REAL", "the '80s surface it mocked became the century's default — it aged into prophecy"),
+ ("‘There is no real me’ — narcissism / the performed self", "REAL", "a disturbingly precise portrait of a self that is all exterior"),
+ ("Interchangeable men, status anxiety, the card duel", "REAL", "the satire of sameness and status lands as hard now as in 1991"),
+ ("Whether Bateman ‘really’ kills anyone", "BY DESIGN", "unresolved on purpose — not a flaw; the point is that no one notices either way"),
+ ("The graphic violence as realism", "STYLIZED", "heightened satire, not docu-realism — the exaggeration is the rhetoric"),
+ ("Bateman as a believable single person", "HALF", "a caricature — and yet recognizable enough to be the discomfort"),
+]
+REALFLUFF_VERDICT = ("Bottom line: the satire is REAL — and has only sharpened. The surface (the brands, the violence) is "
+  "deliberately heightened, and the literal question of whether the murders happened is left open on purpose. What's "
+  "true is the diagnosis: a culture that rewards only surface will keep producing men who are only surface. American "
+  "Psycho isn't a thriller that aged — it's a diagnosis that came true.")
+MESSAGE = ("American Psycho's horror was never the axe — it's that no one notices. Patrick Bateman is what a value "
+  "system that rewards only the surface produces: a flawless exterior with nothing inside, confessing to murder and "
+  "being handed back his dinner reservation. The film indicts a world so consumed by status, brand, and performance "
+  "that it cannot register a human being — victim or monster — underneath. ‘This is not an exit’ is the verdict: "
+  "there is no escape from a self, or a society, built entirely on performance.")
+MESSAGE_SEAL = "The horror isn't that he's a monster — it's that a world this devoted to the surface can't tell, and wouldn't care if it could."
+RF_COL = {"REAL":"#3a7d4e","HALF":"#9a8a5c","STYLIZED":"#5a6b78","BY DESIGN":"#7a5a78","FLUFF":"#8b1a1a"}
 def arc_html():
-    out=[]
+    out=[f'<div class="overall"><span class="ol">THE OVERALL ARC</span>{html.escape(ARC_OVERALL)}</div><div class="arc">']
     for t,s,d in ARC:
         out.append(f'<div class="arc-card"><div class="arc-h">{html.escape(t)}</div><div class="arc-s">{html.escape(s)}</div><p>{html.escape(d)}</p></div>')
-    return "".join(out)
+    out.append('</div>'); return "".join(out)
+def realfluff_html():
+    rows=[]
+    for claim,rate,note in REALFLUFF:
+        c=RF_COL.get(rate,"#888")
+        rows.append(f'<div class="rf-row"><div class="rf-claim">{html.escape(claim)}<span class="rf-note">{html.escape(note)}</span></div><div class="rf-rate" style="color:{c};border-color:{c}">{html.escape(rate)}</div></div>')
+    return '<div class="rf">'+"".join(rows)+f'</div><div class="rf-verdict">{html.escape(REALFLUFF_VERDICT)}</div>'
+def message_html():
+    return f'<p class="msg">{html.escape(MESSAGE)}</p><div class="msg-seal">“{html.escape(MESSAGE_SEAL)}”<span>— AVAN\'s read</span></div>'
 def natures_html():
     cells=[]
     for nm,(col,gloss) in NATURES.items():
@@ -234,6 +264,17 @@ h1{font-family:var(--disp);font-size:clamp(40px,9vw,86px);font-weight:300;letter
 .note b{color:var(--ink)}
 footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--dim);letter-spacing:.05em;line-height:1.95}
 footer a{color:var(--blood);text-decoration:none}
+.overall{background:var(--paper2);border:1px solid var(--line);border-left:3px solid var(--blood);padding:16px 18px;font-size:15px;color:var(--ink);font-style:italic;line-height:1.7;margin-bottom:14px}
+.overall .ol{display:block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.18em;color:var(--blood);text-transform:uppercase;margin-bottom:7px}
+.rf{border:1px solid var(--line);background:var(--card);margin-top:8px}
+.rf-row{display:flex;align-items:center;gap:14px;padding:12px 16px;border-bottom:1px solid var(--faint)}
+.rf-claim{flex:1;font-size:14px;color:var(--ink);line-height:1.4}
+.rf-note{display:block;font-size:11.5px;color:var(--dim);font-style:italic;margin-top:3px}
+.rf-rate{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.05em;border:1px solid;border-radius:3px;padding:4px 9px;min-width:90px;text-align:center;flex-shrink:0}
+.rf-verdict{margin-top:14px;padding:16px 18px;border:1px solid var(--blood);background:rgba(139,26,26,.05);font-size:14px;color:var(--ink);line-height:1.65;font-style:italic}
+.msg{font-size:15.5px;color:var(--ink2);line-height:1.72;margin-top:8px}
+.msg-seal{margin-top:16px;padding:16px 18px;border-left:3px solid var(--blood);background:var(--card);font-size:15px;color:var(--blood);font-style:italic;line-height:1.6}
+.msg-seal span{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:8px}
 </style></head><body><div class="wrap">
   <header>
     <div class="eye"><a href="https://davidwise01.github.io/ud0/">UD0 · Universe David 0</a> · the second film-world</div>
@@ -261,7 +302,9 @@ footer a{color:var(--blood);text-decoration:none}
     <div class="natures">__NATURES__</div></section>
 
   <section class="sec"><h2>The Ideas</h2><p class="ss">why a satire about a business card became a permanent diagnosis</p><div class="pillars">__IDEAS__</div></section>
-  <section class="sec"><h2>The Arc</h2><p class="ss">three beats — the surface, the unraveling, and the door that is not an exit</p><div class="arc">__ARC__</div></section>
+  <section class="sec"><h2>The Arc</h2><p class="ss">the overall arc, then the three beats</p>__ARC__</section>
+  <section class="sec"><h2>Real or Fluff</h2><p class="ss">the honest verdict — is the satire real, or fluff? (the diagnosis, not the body count)</p>__REALFLUFF__</section>
+  <section class="sec"><h2>The Message</h2><p class="ss">what AVAN reads as the film's actual thesis</p>__MESSAGE__</section>
 
   __PERSONAS__
 
@@ -291,7 +334,7 @@ if __name__ == "__main__":
     page = (TEMPLATE.replace("__CARBON__", png_uri(REC,"carbon",320)).replace("__SILICON__", png_uri(REC,"silicon",320))
             .replace("__MONIKER__", html.escape(tok["moniker"]))
             .replace("__NATURES__", natures_html()).replace("__IDEAS__", ideas_html())
-            .replace("__ARC__", arc_html()).replace("__PERSONAS__", personas_html())
+            .replace("__ARC__", arc_html()).replace("__REALFLUFF__", realfluff_html()).replace("__MESSAGE__", message_html()).replace("__PERSONAS__", personas_html())
             .replace("__SECTIONS__", sections_html()))
     open(os.path.join(HERE, "index.html"), "w", encoding="utf-8").write(page)
     print(f"wrote AMERICAN PSYCHO (APX) — badge {tok['moniker']}")
