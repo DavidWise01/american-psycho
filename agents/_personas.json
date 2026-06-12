@@ -1,0 +1,182 @@
+[
+  {
+    "slug": "patrick-bateman",
+    "name": "Patrick Bateman",
+    "epithet": "VP, Pierce & Pierce",
+    "emergence": "spiritual",
+    "moniker": "⟦Patrick Bateman:APX:b7a991⟧",
+    "kind": "carbon",
+    "actor": "Christian Bale"
+  },
+  {
+    "slug": "paul-allen",
+    "name": "Paul Allen",
+    "epithet": "the envied colleague",
+    "emergence": "natural",
+    "moniker": "⟦Paul Allen:APX:6986ad⟧",
+    "kind": "carbon",
+    "actor": "Jared Leto"
+  },
+  {
+    "slug": "evelyn-williams",
+    "name": "Evelyn Williams",
+    "epithet": "the fiancée",
+    "emergence": "ethereal",
+    "moniker": "⟦Evelyn Williams:APX:e3e27e⟧",
+    "kind": "carbon",
+    "actor": "Reese Witherspoon"
+  },
+  {
+    "slug": "jean",
+    "name": "Jean",
+    "epithet": "the secretary",
+    "emergence": "natural",
+    "moniker": "⟦Jean:APX:ba2134⟧",
+    "kind": "carbon",
+    "actor": "Chloë Sevigny"
+  },
+  {
+    "slug": "courtney-rawlinson",
+    "name": "Courtney Rawlinson",
+    "epithet": "the mistress",
+    "emergence": "ethereal",
+    "moniker": "⟦Courtney Rawlinson:APX:14889d⟧",
+    "kind": "carbon",
+    "actor": "Samantha Mathis"
+  },
+  {
+    "slug": "donald-kimball",
+    "name": "Donald Kimball",
+    "epithet": "the detective",
+    "emergence": "natural",
+    "moniker": "⟦Donald Kimball:APX:8b3ff6⟧",
+    "kind": "carbon",
+    "actor": "Willem Dafoe"
+  },
+  {
+    "slug": "timothy-bryce",
+    "name": "Timothy Bryce",
+    "epithet": "colleague",
+    "emergence": "natural",
+    "moniker": "⟦Timothy Bryce:APX:479f90⟧",
+    "kind": "carbon",
+    "actor": "Justin Theroux"
+  },
+  {
+    "slug": "craig-mcdermott",
+    "name": "Craig McDermott",
+    "epithet": "colleague",
+    "emergence": "natural",
+    "moniker": "⟦Craig McDermott:APX:b85ea9⟧",
+    "kind": "carbon",
+    "actor": "Josh Lucas"
+  },
+  {
+    "slug": "david-van-patten",
+    "name": "David Van Patten",
+    "epithet": "colleague",
+    "emergence": "natural",
+    "moniker": "⟦David Van Patten:APX:a0b582⟧",
+    "kind": "carbon",
+    "actor": "Bill Sage"
+  },
+  {
+    "slug": "luis-carruthers",
+    "name": "Luis Carruthers",
+    "epithet": "colleague",
+    "emergence": "natural",
+    "moniker": "⟦Luis Carruthers:APX:cee1ed⟧",
+    "kind": "carbon",
+    "actor": "Matt Ross"
+  },
+  {
+    "slug": "christie",
+    "name": "Christie",
+    "epithet": "the woman he hired",
+    "emergence": "natural",
+    "moniker": "⟦Christie:APX:cd73d7⟧",
+    "kind": "carbon",
+    "actor": "Cara Seymour"
+  },
+  {
+    "slug": "harold-carnes",
+    "name": "Harold Carnes",
+    "epithet": "the lawyer",
+    "emergence": "natural",
+    "moniker": "⟦Harold Carnes:APX:ad2800⟧",
+    "kind": "carbon",
+    "actor": "Stephen Bogaert"
+  },
+  {
+    "slug": "the-business-card",
+    "name": "The Business Card",
+    "epithet": "status anxiety, distilled to an object",
+    "emergence": "electrical",
+    "moniker": "⟦The Business Card:APX:6f74b7⟧",
+    "kind": "synth",
+    "actor": ""
+  },
+  {
+    "slug": "the-morning-routine",
+    "name": "The Morning Routine",
+    "epithet": "the self as product",
+    "emergence": "electrical",
+    "moniker": "⟦The Morning Routine:APX:be6152⟧",
+    "kind": "synth",
+    "actor": ""
+  },
+  {
+    "slug": "the-return-videotapes",
+    "name": "The Return Videotapes",
+    "epithet": "normalcy as alibi",
+    "emergence": "ethereal",
+    "moniker": "⟦The Return Videotapes:APX:1388f4⟧",
+    "kind": "synth",
+    "actor": ""
+  },
+  {
+    "slug": "the-ambiguity",
+    "name": "The Ambiguity",
+    "epithet": "killer or fantasist — the film will not say",
+    "emergence": "ethereal",
+    "moniker": "⟦The Ambiguity:APX:0d8653⟧",
+    "kind": "synth",
+    "actor": ""
+  },
+  {
+    "slug": "the-reaganite-surface",
+    "name": "The Reaganite Surface",
+    "epithet": "the 1987 consumerist void",
+    "emergence": "electrical",
+    "moniker": "⟦The Reaganite Surface:APX:739c01⟧",
+    "kind": "synth",
+    "actor": ""
+  },
+  {
+    "slug": "the-music-monologues",
+    "name": "The Music Monologues",
+    "epithet": "taste as identity",
+    "emergence": "electrical",
+    "moniker": "⟦The Music Monologues:APX:1355fe⟧",
+    "kind": "synth",
+    "actor": ""
+  },
+  {
+    "slug": "the-performed-self",
+    "name": "The Performed Self",
+    "epithet": "masculinity as performance",
+    "emergence": "spiritual",
+    "moniker": "⟦The Performed Self:APX:21bbf5⟧",
+    "kind": "synth",
+    "actor": ""
+  },
+  {
+    "slug": "this-is-not-an-exit",
+    "name": "This Is Not an Exit",
+    "epithet": "the confession that changes nothing",
+    "emergence": "spiritual",
+    "moniker": "⟦This Is Not an Exit:APX:c777ec⟧",
+    "kind": "synth",
+    "actor": ""
+  }
+]
