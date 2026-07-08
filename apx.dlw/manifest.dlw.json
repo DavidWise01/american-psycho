@@ -9,5 +9,12 @@
   "seal": "There is an idea of a Patrick Bateman — but there is no real me, only an entity, and the confession changes nothing: this is not an exit.",
   "seal_sha256": "5e3de54bf06e6507a702f9bfa9b4aec1104135709ce9066d94e9cd5aa0245a48",
   "license": "CC-BY-ND-4.0",
-  "attribution": "ROOT0-ATTRIBUTION-v1.0"
+  "attribution": "ROOT0-ATTRIBUTION-v1.0",
+  "chain": {
+    "index": 678,
+    "prev": "e64edb9f967e26ca9f509d6b623f603db0104917dd1b1ad68a1f26f765ef7711",
+    "link": "d1adb5b332620d4a851d0eb384ad43e37f0e16635c1483c5b2ff3f436eebcae4",
+    "head": "3447d3a0533aaf1e29a8bdc67a9774884fb3ae9dbc8a17064b7a008ca3c4ec90",
+    "chain": "ROOT0-DLW-CHAIN-v1"
+  }
 }
